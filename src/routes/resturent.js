@@ -25,8 +25,8 @@ resturentRouter.post("/", async (req, res) => {
       email: req.body.email,
       description: req.body.description,
       image: {
-        logoPrimary: req.body.image.logoPrimary,
-        logoSecondary: req.body.image.logoSecondary,
+        PrimaryLogoUrl: req.body.image.PrimaryLogoUrl,
+        SecondaryLogoUrl: req.body.image.SecondaryLogoUrl,
       },
     });
 

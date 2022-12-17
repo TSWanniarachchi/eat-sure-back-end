@@ -31,8 +31,8 @@ const openingField = mongoose.Schema(
 // images Field
 const imagesField = mongoose.Schema(
   {
-    logoPrimary: { type: String, required: true },
-    logoSecondary: { type: String, required: true },
+    PrimaryLogoUrl: { type: String, required: true },
+    SecondaryLogoUrl: { type: String, required: true },
   },
   { _id: false }
 );
