@@ -38,7 +38,7 @@ const imagesField = mongoose.Schema(
 );
 
 const resturentSchema = new mongoose.Schema({
-  resturentNo: { type: String, required: true, unique: true, maxlength: 10 },
+  resturentId: { type: String, required: true, unique: true, maxlength: 10 },
   name: { type: String, required: true, minlength: 5 },
   address: addressField,
   location: locationField,
