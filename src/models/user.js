@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
   createdDateTime: { type: Date, default: Date.now() },
 });
 
-// Create an instance of model Outlet
+// Create an instance of model User
 const User = mongoose.model("user", userSchema);
 
 module.exports = User;
