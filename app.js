@@ -7,15 +7,13 @@ const mongoose = require("mongoose");
 const app = express();
 
 //Add Routes
-const resturentRouter = require("./src/routes/resturent");
 const userRouter = require("./src/routes/user");
 const foodRouter = require("./src/routes/food");
 
 // Add Middlewares
 app.use(cors());
 app.use(express.json());
-app.use("/api/resturents", resturentRouter);
-app.use("/api/user", userRouter);
+app.use("/api/users", userRouter);
 app.use("/api/foods", foodRouter);
 
 //Config .env
