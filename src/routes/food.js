@@ -8,9 +8,24 @@ foodRouter.post("/", async (req, res) => {
     const food = new foodModel({
       foodId: req.body.foodId,
       name: req.body.name,
+      cuisinesType: req.body.cuisinesType,
       mealType: req.body.mealType,
       category: req.body.category,
-      price: req.body.price,
+      ingredients: req.body.ingredients,
+      nutritionFacts: {
+        servingSize: req.body.nutritionFacts.servingSize,
+        calories: req.body.nutritionFacts.calories,
+        totalFat: req.body.nutritionFacts.totalFat,
+        saturatedFat: req.body.nutritionFacts.saturatedFat,
+        cholesterol: req.body.nutritionFacts.cholesterol,
+        sodium: req.body.nutritionFacts.sodium,
+        carbohydrate: req.body.nutritionFacts.carbohydrate,
+        sugars: req.body.nutritionFacts.sugars,
+        protein: req.body.nutritionFacts.protein,
+        vitamin: req.body.nutritionFacts.vitamin,
+        calcium: req.body.nutritionFacts.calcium,
+        Iron: req.body.nutritionFacts.Iron,
+      },
       rating: req.body.rating,
       imageUrl: req.body.imageUrl,
       description: req.body.description,
@@ -26,9 +41,39 @@ foodRouter.post("/", async (req, res) => {
 // Get all food details
 foodRouter.get("/", async (req, res) => {
   try {
-    let foods = await foodModel.find();
+    let food = [];
 
-    res.status(200).send(foods);
+    if (req.query.cuisinesType && req.query.mealType) {
+      food = await foodModel.find({
+        cuisinesType: req.query.cuisinesType,
+        mealType: req.query.mealType,
+      });
+      // console.log("cuisinesType & mealType");
+    } else if (req.query.cuisinesType && !req.query.mealType) {
+      food = await foodModel.find({
+        cuisinesType: req.query.cuisinesType,
+      });
+      // console.log("cuisinesType");
+    } else if (req.query.mealType && !req.query.cuisinesType) {
+      food = await foodModel.find({
+        mealType: req.query.mealType,
+      });
+      // console.log("mealType");
+    } else {
+      food = await foodModel.find();
+      // console.log("All");
+    }
+
+    if (food.length === 0) {
+      let errorObj = {
+        message: "Not found any food on our system",
+        statusCode: "NOT FOUND",
+      };
+
+      return res.status(404).send(errorObj);
+    }
+
+    res.status(200).send(food);
   } catch (err) {
     return res.status(500).send(`Error: ${err.message}`);
   }
@@ -39,7 +84,7 @@ foodRouter.get("/:foodId", async (req, res) => {
   try {
     // let food = await foodModel.findById(req.params.foodId);
     let food = await foodModel.findOne({
-      itemId: req.params.foodId,
+      foodId: req.params.foodId,
     });
 
     if (!food) {
@@ -57,47 +102,28 @@ foodRouter.get("/:foodId", async (req, res) => {
   }
 });
 
-// Get food details by meal type
-foodRouter.get("/:mealType/mealType", async (req, res) => {
+// Delete food details by food Id
+foodRouter.delete("/:foodId", async (req, res) => {
   try {
-    let foods = await foodModel.find({
-      mealType: req.params.mealType,
+    let food = await foodModel.findOne({
+      foodId: req.params.foodId,
     });
 
-    if (!foods) {
+    if (!food) {
       let errorObj = {
-        message: "The given meal type does not match any food on our system",
+        message: "The given food id does not match any food on our system",
         statusCode: "NOT FOUND",
       };
-
       return res.status(404).send(errorObj);
     }
 
-    res.status(200).send(foods);
-  } catch (err) {
-    return res.status(500).send(`Error: ${err.message}`);
-  }
-});
-
-// Get food details by category
-foodRouter.get("/:category/category", async (req, res) => {
-  try {
-    let foods = await foodModel.find({
-      category: req.params.category,
+    const deleteFood = await foodModel.deleteOne({
+      foodId: req.params.foodId,
     });
-
-    if (!foods) {
-      let errorObj = {
-        message: "The given category does not match any food on our system",
-        statusCode: "NOT FOUND",
-      };
-
-      return res.status(404).send(errorObj);
-    }
-
-    res.status(200).send(foods);
-  } catch (err) {
-    return res.status(500).send(`Error: ${err.message}`);
+    //res.status(200).json(deleteFood);
+    res.status(200).send("Successfully Deleted!");
+  } catch (ex) {
+    return res.status(500).send(`Error: ${ex.message}`);
   }
 });
 
