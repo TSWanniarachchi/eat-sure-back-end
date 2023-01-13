@@ -6,7 +6,7 @@ const userModel = require("../models/user");
 userRouter.post("/", async (req, res) => {
   try {
     const user = new userModel({
-      username: req.body.username,
+      userId: req.body.userId,
       fullName: req.body.fullName,
       dateOfBirth: req.body.dateOfBirth,
       gender: req.body.gender,
@@ -37,11 +37,11 @@ userRouter.get("/", async (req, res) => {
   }
 });
 
-// Get user details by Username & Password
-userRouter.get("/:username/:password", async (req, res) => {
+// Get user details by userId & Password
+userRouter.get("/:userId/:password", async (req, res) => {
   try {
     let user = await userModel.findOne({
-      username: req.params.username,
+      userId: req.params.userId,
       password: req.params.password,
     });
 
@@ -61,11 +61,11 @@ userRouter.get("/:username/:password", async (req, res) => {
   }
 });
 
-//update user details by username
-userRouter.put("/:username", async (req, res) => {
+//update user details by userId
+userRouter.put("/:userId", async (req, res) => {
   try {
     let user = await userModel.findOne({
-      username: req.params.username,
+      userId: req.params.userId,
     });
 
     if (!user) {
@@ -118,11 +118,11 @@ userRouter.put("/:username", async (req, res) => {
   }
 });
 
-//update user password by username and oldPassword
-userRouter.put("/:username/:oldPassword", async (req, res) => {
+//update user password by userId and oldPassword
+userRouter.put("/:userId/:oldPassword", async (req, res) => {
   try {
     let user = await userModel.findOne({
-      username: req.params.username,
+      userId: req.params.userId,
       password: req.params.oldPassword,
     });
 
@@ -154,11 +154,11 @@ userRouter.put("/:username/:oldPassword", async (req, res) => {
   }
 });
 
-// Delete user details by username
-userRouter.delete("/:username", async (req, res) => {
+// Delete user details by userId
+userRouter.delete("/:userId", async (req, res) => {
   try {
     let user = await userModel.findOne({
-      username: req.params.username,
+      userId: req.params.userId,
     });
 
     if (!user) {
@@ -170,7 +170,7 @@ userRouter.delete("/:username", async (req, res) => {
     }
 
     const deleteuser = await userModel.deleteOne({
-      username: req.params.username,
+      userId: req.params.userId,
     });
     //res.status(200).json(deleteFoodOutlet);
     res.status(200).send("Successfully Deleted!");
