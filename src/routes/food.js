@@ -38,7 +38,7 @@ foodRouter.post("/", async (req, res) => {
   }
 });
 
-// Get all food details
+// Get all food details with filterations
 foodRouter.get("/", async (req, res) => {
   try {
     let food = [];
