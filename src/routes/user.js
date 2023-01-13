@@ -172,7 +172,7 @@ userRouter.delete("/:userId", async (req, res) => {
     const deleteuser = await userModel.deleteOne({
       userId: req.params.userId,
     });
-    //res.status(200).json(deleteFoodOutlet);
+    //res.status(200).json(deleteuser);
     res.status(200).send("Successfully Deleted!");
   } catch (ex) {
     return res.status(500).send(`Error: ${ex.message}`);
