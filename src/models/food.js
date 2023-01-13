@@ -1,29 +1,20 @@
 const mongoose = require("mongoose");
 
-// Location Field
-const locationField = mongoose.Schema(
-  {
-    latitude: { type: Number, required: true },
-    longitude: { type: Number, required: true },
-  },
-  { _id: false }
-);
-
 // Nutrition Facts Field
 const NutritionFactsField = mongoose.Schema(
   {
     servingSize: { type: Number, required: true, minlength: 2 },
-    calories: { type: Number, required: true, minlength: 4 },
-    totalFat: { type: Number, required: true, minlength: 4 },
-    saturatedFat: { type: Number, required: true, minlength: 4 },
-    cholesterol: { type: Number, required: true, minlength: 4 },
-    sodium: { type: Number, required: true, minlength: 4 },
-    carbohydrate: { type: Number, required: true, minlength: 4 },
-    sugars: { type: Number, required: true, minlength: 4 },
-    protein: { type: Number, required: true, minlength: 4 },
-    vitamin: { type: Number, required: true, minlength: 4 },
-    calcium: { type: String, required: true, minlength: 10 },
-    Iron: { type: Number, required: true, minlength: 4 },
+    calories: { type: Number, required: true, minlength: 5 },
+    totalFat: { type: String, required: false },
+    saturatedFat: { type: String, required: false },
+    cholesterol: { type: String, required: false },
+    sodium: { type: String, required: false },
+    carbohydrate: { type: String, required: false },
+    sugars: { type: String, required: false },
+    protein: { type: String, required: false },
+    vitamin: { type: String, required: false },
+    calcium: { type: String, required: false },
+    Iron: { type: String, required: false },
   },
   { _id: false }
 );
