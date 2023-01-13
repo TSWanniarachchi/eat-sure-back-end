@@ -6,7 +6,7 @@ const foodModel = require("../models/food");
 foodRouter.post("/", async (req, res) => {
   try {
     const food = new foodModel({
-      itemId: req.body.itemId,
+      foodId: req.body.foodId,
       name: req.body.name,
       mealType: req.body.mealType,
       category: req.body.category,

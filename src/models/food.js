@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const foodSchema = new mongoose.Schema({
-  itemId: { type: String, required: true, unique: true },
+  foodId: { type: String, required: true, unique: true },
   name: { type: String, required: true, minlength: 5 },
   mealType: { type: String, required: true },
   category: { type: String, required: true },
@@ -14,6 +14,6 @@ const foodSchema = new mongoose.Schema({
 });
 
 // Create an instance of model Outlet
-const Food = mongoose.model("food", foodSchema);
+const Food = mongoose.model("foods", foodSchema);
 
 module.exports = Food;
