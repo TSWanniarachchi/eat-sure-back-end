@@ -8,6 +8,7 @@ const app = express();
 
 //Add Routes
 const userRouter = require("./src/routes/user");
+const cuisineRouter = require("./src/routes/cuisine");
 const foodRouter = require("./src/routes/food");
 const favoriteRouter = require("./src/routes/favorite");
 
@@ -15,6 +16,7 @@ const favoriteRouter = require("./src/routes/favorite");
 app.use(cors());
 app.use(express.json());
 app.use("/api/users", userRouter);
+app.use("/api/cuisines", cuisineRouter);
 app.use("/api/foods", foodRouter);
 app.use("/api/favorites", favoriteRouter);
 
