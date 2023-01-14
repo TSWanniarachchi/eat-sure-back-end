@@ -9,12 +9,14 @@ const app = express();
 //Add Routes
 const userRouter = require("./src/routes/user");
 const foodRouter = require("./src/routes/food");
+const favoriteRouter = require("./src/routes/favorite");
 
 // Add Middlewares
 app.use(cors());
 app.use(express.json());
 app.use("/api/users", userRouter);
 app.use("/api/foods", foodRouter);
+app.use("/api/favorites", favoriteRouter);
 
 //Config .env
 dotenv.config();
