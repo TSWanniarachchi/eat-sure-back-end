@@ -2,7 +2,7 @@ const express = require("express");
 const async = require("async");
 const favoriteRouter = express.Router();
 const favoriteModel = require("../models/favorite");
-const foodModel = require("../models/foodOutlet");
+const foodModel = require("../models/food");
 
 // Insert favorite food item detail
 favoriteRouter.post("/", async (req, res) => {
@@ -49,7 +49,6 @@ favoriteRouter.post("/", async (req, res) => {
 
     const newFavoriteFood = await favoriteFood.save();
     res.status(200).send(newFavoriteFood);
-
     // console.log("Successfully Inserted");
   } catch (err) {
     return res.status(500).send(`Error: ${err.message}`);
@@ -83,9 +82,11 @@ favoriteRouter.get("/:userId", async (req, res) => {
       return await foodModel.findOne({ foodId: food.foodId }).select({
         foodId: 1,
         name: 1,
+        cuisinesType: 1,
         mealType: 1,
         category: 1,
-        price: 1,
+        ingredients: 1,
+        nutritionFacts: 1,
         rating: 1,
         imageUrl: 1,
         isActive: 1,
@@ -111,7 +112,7 @@ favoriteRouter.get("/:userId", async (req, res) => {
 // Delete favorite food by userId & foodId
 favoriteRouter.delete("/:userId/:foodId", async (req, res) => {
   try {
-    //Check food is alredy added in the system
+    //Check favorite food is alredy added in the system
     let checkExistFavoriteFood = await favoriteModel.findOne({
       userId: req.params.userId,
       foodId: req.params.foodId,
@@ -132,7 +133,8 @@ favoriteRouter.delete("/:userId/:foodId", async (req, res) => {
       foodId: req.params.foodId,
     });
 
-    res.status(200).send(deleteFavoriteFood);
+    // res.status(200).send(deleteFavoriteFood);
+    res.status(200).send("Successfully Deleted!");
   } catch (err) {
     return res.status(500).send(`Error: ${err.message}`);
   }
