@@ -1,4 +1,3 @@
-const { Int32 } = require("mongodb");
 const mongoose = require("mongoose");
 
 // Location Field
@@ -11,7 +10,7 @@ const locationField = mongoose.Schema(
 );
 
 const userSchema = new mongoose.Schema({
-  username: { type: String, required: true, minlength: 5, unique: true },
+  userId: { type: String, required: true, minlength: 5, unique: true },
   fullName: { type: String, required: true, minlength: 5 },
   dateOfBirth: { type: Date, required: true },
   gender: { type: String, required: true },
@@ -23,7 +22,7 @@ const userSchema = new mongoose.Schema({
   createdDateTime: { type: Date, default: Date.now() },
 });
 
-// Create an instance of model Outlet
-const User = mongoose.model("user", userSchema);
+// Create an instance of model User
+const User = mongoose.model("users", userSchema);
 
 module.exports = User;
