@@ -40,7 +40,7 @@ userRouter.get("/", async (req, res) => {
 // Get user details by userId & Password
 userRouter.get("/:userId/:password", async (req, res) => {
   try {
-    let user = await userModel.findOne({
+    let user = await userModel.find({
       userId: req.params.userId,
       password: req.params.password,
     });
