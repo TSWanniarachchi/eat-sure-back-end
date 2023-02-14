@@ -73,7 +73,7 @@ foodRouter.get("/", async (req, res) => {
       return res.status(404).send(errorObj);
     }
 
-    res.status(200).send(food);
+    res.status(200).send(result);
   } catch (err) {
     return res.status(500).send(`Error: ${err.message}`);
   }
