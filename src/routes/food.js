@@ -83,7 +83,7 @@ foodRouter.get("/", async (req, res) => {
 foodRouter.get("/:foodId", async (req, res) => {
   try {
     // let food = await foodModel.findById(req.params.foodId);
-    let food = await foodModel.findOne({
+    let food = await foodModel.find({
       foodId: req.params.foodId,
     });
 
