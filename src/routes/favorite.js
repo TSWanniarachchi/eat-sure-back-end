@@ -124,7 +124,8 @@ favoriteRouter.delete("/:userId/:foodId", async (req, res) => {
         message:
           "The given user Id & food Id does not match any favorite food on our system",
       };
-      return res.status(404).send(errorObj);
+
+      return res.status(404).send([errorObj]);
     }
 
     //Delete favorite food
@@ -137,7 +138,7 @@ favoriteRouter.delete("/:userId/:foodId", async (req, res) => {
       status: true,
       message: "Successfully Deleted!",
     };
-    res.status(200).send(successObj);
+    res.status(200).send([successObj]);
     // res.status(200).send(deleteFavoriteFood);
   } catch (err) {
     return res.status(500).send(`Error: ${err.message}`);
