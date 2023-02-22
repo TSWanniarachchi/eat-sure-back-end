@@ -120,7 +120,7 @@ favoriteRouter.delete("/:userId/:foodId", async (req, res) => {
 
     if (!checkExistFavoriteFood) {
       let errorObj = {
-        statusCode: "404",
+        status: false,
         message:
           "The given user Id & food Id does not match any favorite food on our system",
       };
@@ -134,7 +134,7 @@ favoriteRouter.delete("/:userId/:foodId", async (req, res) => {
     });
 
     let successObj = {
-      statusCode: "200",
+      status: true,
       message: "Successfully Deleted!",
     };
     res.status(200).send(successObj);
