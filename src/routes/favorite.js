@@ -120,9 +120,9 @@ favoriteRouter.delete("/:userId/:foodId", async (req, res) => {
 
     if (!checkExistFavoriteFood) {
       let errorObj = {
+        statusCode: "404",
         message:
           "The given user Id & food Id does not match any favorite food on our system",
-        statusCode: "SYSTEM ERROR : NOT FOUND",
       };
       return res.status(404).send(errorObj);
     }
@@ -133,8 +133,12 @@ favoriteRouter.delete("/:userId/:foodId", async (req, res) => {
       foodId: req.params.foodId,
     });
 
+    let successObj = {
+      statusCode: "200",
+      message: "Successfully Deleted!",
+    };
+    res.status(200).send(successObj);
     // res.status(200).send(deleteFavoriteFood);
-    res.status(200).send("Successfully Deleted!");
   } catch (err) {
     return res.status(500).send(`Error: ${err.message}`);
   }
