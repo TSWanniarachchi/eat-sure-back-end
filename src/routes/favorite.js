@@ -138,7 +138,7 @@ favoriteRouter.delete("/:userId/:foodId", async (req, res) => {
     });
 
     let successObj = {
-      success: false,
+      success: true,
       message: "Successfully Deleted!",
     };
     res.status(200).send([successObj]);
