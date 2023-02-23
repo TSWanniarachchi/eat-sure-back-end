@@ -10,19 +10,19 @@ favoriteRouter.post("/", async (req, res) => {
     //Check mandatory value userId
     if (!req.body.userId) {
       let errorObj = {
+        status: false,
         message: "userId is required.",
-        status: "SYSTEM ERROR",
       };
-      return res.status(400).send(errorObj);
+      return res.status(400).send([errorObj]);
     }
 
     //Check mandatory value foodId
     if (!req.body.foodId) {
       let errorObj = {
+        status: false,
         message: "foodId Id is required.",
-        status: "SYSTEM ERROR",
       };
-      return res.status(400).send(errorObj);
+      return res.status(400).send([errorObj]);
     }
 
     //Check food is alredy added
@@ -33,10 +33,10 @@ favoriteRouter.post("/", async (req, res) => {
 
     if (checkExistFavoriteFood) {
       let errorObj = {
+        status: false,
         message: "This food is alredy added.",
-        status: "ALREDY EXIST",
       };
-      return res.status(400).send(errorObj);
+      return res.status(400).send([errorObj]);
 
       // console.log("This food data is alredy added.");
     }
@@ -48,8 +48,12 @@ favoriteRouter.post("/", async (req, res) => {
     });
 
     const newFavoriteFood = await favoriteFood.save();
-    res.status(200).send(newFavoriteFood);
-    // console.log("Successfully Inserted");
+    let successObj = {
+      status: true,
+      message: "Successfully Inserted!",
+    };
+    res.status(200).send([successObj]);
+    // res.status(200).send(newFavoriteFood);
   } catch (err) {
     return res.status(500).send(`Error: ${err.message}`);
   }
