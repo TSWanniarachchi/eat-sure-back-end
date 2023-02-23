@@ -10,7 +10,7 @@ favoriteRouter.post("/", async (req, res) => {
     //Check mandatory value userId
     if (!req.body.userId) {
       let errorObj = {
-        status: false,
+        success: false,
         message: "userId is required.",
       };
       return res.status(400).send([errorObj]);
@@ -19,7 +19,7 @@ favoriteRouter.post("/", async (req, res) => {
     //Check mandatory value foodId
     if (!req.body.foodId) {
       let errorObj = {
-        status: false,
+        success: false,
         message: "foodId Id is required.",
       };
       return res.status(400).send([errorObj]);
@@ -33,7 +33,7 @@ favoriteRouter.post("/", async (req, res) => {
 
     if (checkExistFavoriteFood) {
       let errorObj = {
-        status: false,
+        success: false,
         message: "This food is alredy added.",
       };
       return res.status(400).send([errorObj]);
@@ -48,7 +48,7 @@ favoriteRouter.post("/", async (req, res) => {
     const newFavoriteFood = await favoriteFood.save();
 
     let successObj = {
-      status: true,
+      success: true,
       message: "Successfully Inserted!",
     };
     res.status(200).send([successObj]);
@@ -72,12 +72,12 @@ favoriteRouter.get("/:userId", async (req, res) => {
 
     if (favoriteFoods.length === 0) {
       let errorObj = {
+        success: false,
         message:
           "The given user does not match any favorite food items on our system",
-        statusCode: "NOT FOUND",
       };
 
-      return res.status(404).send(errorObj);
+      return res.status(404).send([errorObj]);
     }
 
     //If has user wise favorite foods, then get food details
@@ -98,12 +98,12 @@ favoriteRouter.get("/:userId", async (req, res) => {
 
     if (!foods) {
       let errorObj = {
+        success: false,
         message:
           "The given food Id by favorite list but, does not match any food on our system",
-        statusCode: "NOT FOUND",
       };
 
-      return res.status(404).send(errorObj);
+      return res.status(404).send([errorObj]);
     }
 
     res.status(200).send(foods);
@@ -123,7 +123,7 @@ favoriteRouter.delete("/:userId/:foodId", async (req, res) => {
 
     if (!checkExistFavoriteFood) {
       let errorObj = {
-        status: false,
+        success: false,
         message:
           "The given user Id & food Id does not match any favorite food on our system",
       };
@@ -138,7 +138,7 @@ favoriteRouter.delete("/:userId/:foodId", async (req, res) => {
     });
 
     let successObj = {
-      status: true,
+      success: false,
       message: "Successfully Deleted!",
     };
     res.status(200).send([successObj]);
