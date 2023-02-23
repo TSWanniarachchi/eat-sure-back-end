@@ -37,7 +37,6 @@ favoriteRouter.post("/", async (req, res) => {
         message: "This food is alredy added.",
       };
       return res.status(400).send([errorObj]);
-
       // console.log("This food data is alredy added.");
     }
 
@@ -46,8 +45,8 @@ favoriteRouter.post("/", async (req, res) => {
       userId: req.body.userId,
       foodId: req.body.foodId,
     });
-
     const newFavoriteFood = await favoriteFood.save();
+
     let successObj = {
       status: true,
       message: "Successfully Inserted!",
